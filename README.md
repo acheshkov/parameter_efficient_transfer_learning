@@ -4,3 +4,12 @@ Inspired by a paper ["Parameter-Efficient Transfer Learning for NLP"](https://ar
 
 
 In my example, I take HuggingFace implementation of a Roberta model and do monkey patch.
+
+```python
+for t_layer in model.encoder.layer:
+    # inject adapter twice for each layer
+    inject_adapter(t_layer.attention.output, bottleneck_size=1)
+    inject_adapter(t_layer.output, bottleneck_size=1)
+```
+
+For more details see `main.py`
